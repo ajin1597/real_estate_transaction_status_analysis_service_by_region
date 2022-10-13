@@ -35,7 +35,7 @@ export default function Layout(props: any) {
                 <span>Home</span>
               </div>
             </Link>
-            <Link href={"/ranking"} id="second_page">
+            <Link href={"/indexHouse"} id="second_page">
               <div className="hover:bg-blue-300">
                 <div id="second_page_icon" className="flex justify-center ">
                   <svg
@@ -53,7 +53,7 @@ export default function Layout(props: any) {
                     />
                   </svg>
                 </div>
-                <span>Ranking</span>
+                <span>HouseIndex</span>
               </div>
             </Link>
             <Link href={"/mypage"} id="third_page">

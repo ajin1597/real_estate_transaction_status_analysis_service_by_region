@@ -17,13 +17,15 @@ const Home: NextPage = () => {
   const router = useRouter();
   const [secondRegion, setSecondRegion] = useState<secondRegionType[]>([]);
   // 첫번째박스에서 선택한 정보에 맞게 두번째 셀렉트박스 변경
-  const [ageRegions, setAgeRegions] = useState("");
+  const [indexRegions, setIndexRegions] = useState("");
   //DB에 저장한 모든 정보값들을 담아내기 위한 변수
-  const [ageDayRegion, setAgeDayRegion] = useState("");
+  const [indexDayRegion, setIndexDayRegion] = useState("");
   const [click, setClick] = useState(true);
   // 버튼을 클릭했을 시 보낼 데이터를 담아내는 변수
-  const [houseData06, setHouseData06] = useState("");
-  const [aparttData07, setapArttData07] = useState("");
+  const [houseSdata, setHouseSdata] = useState("");
+  const [houseDdata, setHouseDdata] = useState("");
+  const [apartSdata, setApartSdata] = useState("");
+  const [apartDdata, setApartDdata] = useState("");
 
   const [firstRegion, setFirstRegion] = useState([
     { region: "서울", regionCD: "11000" },
@@ -341,29 +343,32 @@ const Home: NextPage = () => {
   ]);
 
   const regions = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.currentTarget.value);
-    setAgeRegions(event.currentTarget.value);
+    // console.log(event.currentTarget.value);
+    setIndexRegions(event.currentTarget.value);
   }; //두번째 셀렉트박스 onChange함수
 
   const dayRegions = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.currentTarget.value);
-    setAgeDayRegion(event.currentTarget.value);
+    // console.log(event.currentTarget.value);
+    setIndexDayRegion(event.currentTarget.value);
   };
 
   useEffect(() => {
     const data = {
-      ageRegions,
-      ageDayRegion,
+      indexRegions,
+      indexDayRegion,
     };
+    // console.log(data.indexRegions);
+    // console.log(data.indexDayRegion);
 
-    fetch(`api/age/${JSON.stringify(data)}`)
+    fetch(`api/regionIndex/${JSON.stringify(data)}`)
       .then((res) => res.json())
       .then((json) => {
-        // setAgeRegions(json);
+        // setIndexRegions(json);
+        console.log(json);
         // console.log(json.House);
-        console.log(json.Apart);
-        setHouseData06(json.House);
-        setapArttData07(json.Apart);
+        // console.log(json.Apart);
+        // setHouseSdata(json.House);
+        // setApartSdata(json.Apart);
       });
   }, [click]); // 검색 버튼을 누르면 셀렉트박스에 지정된 지역 렌더링
 
@@ -376,7 +381,7 @@ const Home: NextPage = () => {
             className="flex justify-between border-2 h-[12.6vh] w-[135.4vh] font-bold bg-red-200"
           >
             <div className="flex justify-center items-center bg-red-200 w-[300px]  text-3xl hover:bg-blue-200  h-full border-r-2">
-              연령대
+              지수
             </div>
             <div className="flex justify-between items-center text-xl">
               <div id="first_select_box_bar" className=" w-[250px]">
@@ -425,14 +430,14 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        {houseData06 ? (
+        {houseSdata ? (
           <div className="h-[71vh] w-full bg-blue-200 flex justify-around items-center">
             <div id="first_chart">
               <div className="text-2xl p-2 flex justify-center">
                 주택 평균 거래 연령
               </div>
               <div className="w-[450px] h-[450px]">
-                <DoughnutChart data={houseData06}></DoughnutChart>
+                <DoughnutChart data={houseSdata}></DoughnutChart>
               </div>
             </div>
 
@@ -441,7 +446,7 @@ const Home: NextPage = () => {
                 아파트 평균 거래 연령
               </div>
               <div className="w-[450px] h-[450px]">
-                <DoughnutChart data={aparttData07}></DoughnutChart>
+                <DoughnutChart data={apartSdata}></DoughnutChart>
               </div>
             </div>
           </div>
