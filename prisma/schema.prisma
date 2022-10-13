@@ -1,0 +1,75 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Transactions_age_2022 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  DEAL_OBJ      String?
+  REGION_CD     String?
+  ALL_CNT       Int?
+  AGE01_CNT     Int?
+  AGE02_CNT     Int?
+  AGE03_CNT     Int?
+  AGE04_CNT     Int?
+  AGE05_CNT     Int?
+  AGE06_CNT     Int?
+  AGE07_CNT     Int?
+}
+
+model Transactions_age_2021 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  DEAL_OBJ      String?
+  REGION_CD     String?
+  ALL_CNT       Int?
+  AGE01_CNT     Int?
+  AGE02_CNT     Int?
+  AGE03_CNT     Int?
+  AGE04_CNT     Int?
+  AGE05_CNT     Int?
+  AGE06_CNT     Int?
+  AGE07_CNT     Int?
+}
+
+model Transactions_age_2020 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  DEAL_OBJ      String?
+  REGION_CD     String?
+  ALL_CNT       Int?
+  AGE01_CNT     Int?
+  AGE02_CNT     Int?
+  AGE03_CNT     Int?
+  AGE04_CNT     Int?
+  AGE05_CNT     Int?
+  AGE06_CNT     Int?
+  AGE07_CNT     Int?
+}
+
+model Transactions_age_2019 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  DEAL_OBJ      String?
+  REGION_CD     String?
+  ALL_CNT       Int?
+  AGE01_CNT     Int?
+  AGE02_CNT     Int?
+  AGE03_CNT     Int?
+  AGE04_CNT     Int?
+  AGE05_CNT     Int?
+  AGE06_CNT     Int?
+  AGE07_CNT     Int?
+}
