@@ -26,6 +26,8 @@ model Transactions_age_2022 {
   AGE07_CNT     Int?
 }
 
+//연령별2022
+
 model Transactions_age_2021 {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
   REGION_NM     String?
@@ -41,6 +43,8 @@ model Transactions_age_2021 {
   AGE06_CNT     Int?
   AGE07_CNT     Int?
 }
+
+//연령별2021
 
 model Transactions_age_2020 {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
@@ -58,6 +62,8 @@ model Transactions_age_2020 {
   AGE07_CNT     Int?
 }
 
+//연령별2020
+
 model Transactions_age_2019 {
   id            String  @id @default(auto()) @map("_id") @db.ObjectId
   REGION_NM     String?
@@ -73,3 +79,65 @@ model Transactions_age_2019 {
   AGE06_CNT     Int?
   AGE07_CNT     Int?
 }
+
+//연령별2019
+
+model apartHouseIndex_2022 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  APT_TYPE      String?
+  INDICES       Float?
+  LEVEL_NO      String
+  ORDER_NO      Int?
+  REGION_CD     String?
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  TR_GBN        String?
+  WEEK_FLAG     String?
+}
+
+//지수별2022
+
+model apartHouseIndex_2021 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  APT_TYPE      String?
+  INDICES       Float?
+  LEVEL_NO      String?
+  ORDER_NO      Int?
+  REGION_CD     String?
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  TR_GBN        String?
+  WEEK_FLAG     String?
+}
+
+//지수별2021
+
+model apartHouseIndex_2020 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  APT_TYPE      String?
+  INDICES       Float?
+  LEVEL_NO      String
+  ORDER_NO      Int?
+  REGION_CD     String?
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  TR_GBN        String?
+  WEEK_FLAG     String?
+}
+
+//지수별2020
+
+model apartHouseIndex_2019 {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  APT_TYPE      String?
+  INDICES       Float?
+  LEVEL_NO      String
+  ORDER_NO      Int?
+  REGION_CD     String?
+  REGION_NM     String?
+  RESEARCH_DATE String?
+  TR_GBN        String?
+  WEEK_FLAG     String?
+}
+
+//지수별2019

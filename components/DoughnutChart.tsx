@@ -26,29 +26,9 @@ interface resultDataType {
 
 export default function DoughnutChart(props: any) {
   const router = useRouter();
-  // const houseData = props.data[0];
-  // console.log(houseData.Apart);
-  // console.log(Number(props.data[0].DEAL_OBJ));
-
-  // if (props.data[0].DEAL_OBJ == "06") {
-  //   const house1 = props.data[0];
-  //   console.log("123");
-  // } else {
-  //   const apart1 = props.data[0];
-  //   console.log(apart1);
-  // }
 
   let resultData: any = props.data[0];
   useEffect(() => {}, []);
-
-  // console.log(resultData.AGE01_CNT);
-
-  // console.log(props.data.ageData2022House);
-  // console.log(props.data.ageData202206[1]);
-  // console.log(props.data.ageData202206[2]);
-
-  // const regionObject = props.data.ageData202206;
-  // console.log(regionObject);
 
   const [ChartData, setChartData] = useState<
     ChartData<"doughnut", Number[], String>
@@ -102,7 +82,7 @@ export default function DoughnutChart(props: any) {
       legend: {
         display: true,
         align: "center",
-        position: "right",
+        position: "left",
         // maxWidth: 0,
         // maxHeight: 50,
       },
@@ -120,7 +100,6 @@ export default function DoughnutChart(props: any) {
         {
           label: "123",
           data: [
-            // 1, 2, 3, 4, 5, 10, 7,
             resultData?.AGE01_CNT,
             resultData?.AGE02_CNT,
             resultData?.AGE03_CNT,
