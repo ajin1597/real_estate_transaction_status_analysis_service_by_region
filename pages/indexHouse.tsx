@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import DoughnutChart from "../components/DoughnutChart";
 import React from "react";
 import { useRouter } from "next/router";
+import { copyFileSync } from "fs";
 
 interface secondRegionType {
   region: String;
@@ -19,7 +20,9 @@ const Home: NextPage = () => {
   // 첫번째박스에서 선택한 정보에 맞게 두번째 셀렉트박스 변경
   const [indexRegions, setIndexRegions] = useState("");
   //DB에 저장한 모든 정보값들을 담아내기 위한 변수
-  const [indexDayRegion, setIndexDayRegion] = useState("");
+  const [indexMonthDay, setIndexMonthDay] = useState("");
+  const [indexLastMonthDay, setLastIndexMonthDay] = useState("");
+
   const [click, setClick] = useState(true);
   // 버튼을 클릭했을 시 보낼 데이터를 담아내는 변수
   const [houseSdata, setHouseSdata] = useState("");
@@ -348,27 +351,39 @@ const Home: NextPage = () => {
   }; //두번째 셀렉트박스 onChange함수
 
   const dayRegions = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    // console.log(event.currentTarget.value);
-    setIndexDayRegion(event.currentTarget.value);
+    const idx = Number(event.currentTarget.value);
+    const day = Number(ageValue[idx].RESEARCH_DATE);
+    const lastDay = day + 1;
+
+    const stringDay = day.toString();
+    const stringLastDAy = lastDay.toString();
+    setIndexMonthDay(stringDay);
+    setLastIndexMonthDay(stringLastDAy);
   };
 
   useEffect(() => {
     const data = {
       indexRegions,
-      indexDayRegion,
+      indexMonthDay,
+      indexLastMonthDay,
     };
-    // console.log(data.indexRegions);
-    // console.log(data.indexDayRegion);
+    // console.log(data.indexMonthDay);
+    // console.log(data.indexLastMonthDay);
 
+    // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     fetch(`api/regionIndex/${JSON.stringify(data)}`)
       .then((res) => res.json())
       .then((json) => {
         // setIndexRegions(json);
-        console.log(json);
-        // console.log(json.House);
-        // console.log(json.Apart);
-        // setHouseSdata(json.House);
-        // setApartSdata(json.Apart);
+        // console.log(json);
+        // console.log(json.HouseS);
+        // console.log(json.HouseD);
+        // console.log(json.ApartS);
+        // console.log(json.ApartD);
+        setHouseSdata(json.HouseS);
+        setHouseDdata(json.HouseD);
+        setApartSdata(json.ApartS);
+        setApartDdata(json.ApartD);
       });
   }, [click]); // 검색 버튼을 누르면 셀렉트박스에 지정된 지역 렌더링
 
@@ -410,7 +425,7 @@ const Home: NextPage = () => {
                 <select className="w-[200px]" onChange={dayRegions}>
                   <option hidden>날짜선택</option>
                   {ageValue.map((ele: any, idx) => (
-                    <option key={idx} value={ele.RESEARCH_DATE}>
+                    <option key={idx} value={idx}>
                       {ele.RESEARCH_DATE}
                     </option>
                   ))}

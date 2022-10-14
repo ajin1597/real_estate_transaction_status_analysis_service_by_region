@@ -15,18 +15,21 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { indexRegions, indexDayRegion } = JSON.parse(
+  const { indexRegions, indexMonthDay, indexLastMonthDay } = JSON.parse(
     req.query.index?.toString() || ""
   );
   // console.log(indexRegions);
-  // console.log(indexDayRegion);
+  // console.log(indexMonthDay);
+  // console.log(indexLastMonthDay);
+  console.log(req.query.index?.toString());
+  console.log(indexRegions);
 
   let HouseS;
   let HouseD;
   let ApartS;
   let ApartD;
 
-  const yearNumber = (Number(indexDayRegion) / 100).toFixed(0);
+  const yearNumber = (Number(indexMonthDay) / 100).toFixed(0);
 
   console.log(yearNumber);
 
@@ -38,7 +41,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       HouseD = await prisma.apartHouseIndex_2022.findMany({
@@ -47,7 +53,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartS = await prisma.apartHouseIndex_2022.findMany({
@@ -56,7 +65,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartD = await prisma.apartHouseIndex_2022.findMany({
@@ -65,7 +77,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       break;
@@ -76,7 +91,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       HouseD = await prisma.apartHouseIndex_2021.findMany({
@@ -85,7 +103,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartS = await prisma.apartHouseIndex_2021.findMany({
@@ -94,7 +115,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartD = await prisma.apartHouseIndex_2021.findMany({
@@ -103,7 +127,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       break;
@@ -114,7 +141,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       HouseD = await prisma.apartHouseIndex_2020.findMany({
@@ -123,7 +153,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartS = await prisma.apartHouseIndex_2020.findMany({
@@ -132,7 +165,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartD = await prisma.apartHouseIndex_2020.findMany({
@@ -141,7 +177,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       break;
@@ -152,7 +191,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       HouseD = await prisma.apartHouseIndex_2019.findMany({
@@ -161,7 +203,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartS = await prisma.apartHouseIndex_2019.findMany({
@@ -170,7 +215,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       ApartD = await prisma.apartHouseIndex_2019.findMany({
@@ -179,7 +227,10 @@ export default async function handler(
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "D",
-          RESEARCH_DATE: indexDayRegion,
+          AND: [
+            { RESEARCH_DATE: indexMonthDay },
+            { RESEARCH_DATE: indexLastMonthDay },
+          ],
         },
       });
       break;
