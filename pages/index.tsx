@@ -341,7 +341,7 @@ const Home: NextPage = () => {
   ]);
 
   const regions = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.currentTarget.value);
+    // console.log(event.currentTarget.value);
     setAgeRegions(event.currentTarget.value);
   }; //두번째 셀렉트박스 onChange함수
 

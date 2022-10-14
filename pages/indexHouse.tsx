@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import DoughnutChart from "../components/DoughnutChart";
+import BarChart from "../components/BarChart";
 import React from "react";
 import { useRouter } from "next/router";
 import { copyFileSync } from "fs";
@@ -25,10 +25,13 @@ const Home: NextPage = () => {
 
   const [click, setClick] = useState(true);
   // 버튼을 클릭했을 시 보낼 데이터를 담아내는 변수
-  const [houseSdata, setHouseSdata] = useState("");
-  const [houseDdata, setHouseDdata] = useState("");
-  const [apartSdata, setApartSdata] = useState("");
-  const [apartDdata, setApartDdata] = useState("");
+  const [houseSdata, setHouseSTdata] = useState({});
+
+  const [houseDdata, setHouseDTdata] = useState({});
+
+  const [apartSdata, setApartSTdata] = useState({});
+
+  const [apartDdata, setApartDTdata] = useState({});
 
   const [firstRegion, setFirstRegion] = useState([
     { region: "서울", regionCD: "11000" },
@@ -352,13 +355,16 @@ const Home: NextPage = () => {
 
   const dayRegions = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const idx = Number(event.currentTarget.value);
-    const day = Number(ageValue[idx].RESEARCH_DATE);
-    const lastDay = day + 1;
+    // console.log(event.currentTarget.value);
+    // console.log(idx + 1);
+    const day = ageValue[idx].RESEARCH_DATE;
+    const lastDay = ageValue[idx + 1].RESEARCH_DATE;
 
-    const stringDay = day.toString();
-    const stringLastDAy = lastDay.toString();
-    setIndexMonthDay(stringDay);
-    setLastIndexMonthDay(stringLastDAy);
+    // console.log(day);
+    // console.log(lastDay);
+
+    setIndexMonthDay(day);
+    setLastIndexMonthDay(lastDay);
   };
 
   useEffect(() => {
@@ -376,14 +382,22 @@ const Home: NextPage = () => {
       .then((json) => {
         // setIndexRegions(json);
         // console.log(json);
-        // console.log(json.HouseS);
-        // console.log(json.HouseD);
-        // console.log(json.ApartS);
-        // console.log(json.ApartD);
-        setHouseSdata(json.HouseS);
-        setHouseDdata(json.HouseD);
-        setApartSdata(json.ApartS);
-        setApartDdata(json.ApartD);
+        setHouseSTdata({
+          HouseST: json.HouseST,
+          HouseSL: json.HouseSL,
+        });
+        setHouseDTdata({
+          HouseDT: json.HouseDT,
+          HouseDL: json.HouseDL,
+        });
+        setApartSTdata({
+          ApartST: json.ApartST,
+          ApartSL: json.ApartSL,
+        });
+        setApartDTdata({
+          ApartDT: json.ApartDT,
+          ApartDL: json.ApartDL,
+        });
       });
   }, [click]); // 검색 버튼을 누르면 셀렉트박스에 지정된 지역 렌더링
 
@@ -452,7 +466,7 @@ const Home: NextPage = () => {
                 주택 평균 거래 연령
               </div>
               <div className="w-[450px] h-[450px]">
-                <DoughnutChart data={houseSdata}></DoughnutChart>
+                {/* <BarChart data={houseSdata}></BarChart> */}
               </div>
             </div>
 
@@ -461,7 +475,7 @@ const Home: NextPage = () => {
                 아파트 평균 거래 연령
               </div>
               <div className="w-[450px] h-[450px]">
-                <DoughnutChart data={apartSdata}></DoughnutChart>
+                {/* <BarChart data={apartSdata}></BarChart> */}
               </div>
             </div>
           </div>
