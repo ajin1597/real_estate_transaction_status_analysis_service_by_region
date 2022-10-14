@@ -23,7 +23,7 @@ export default async function handler(
   // console.log(indexLastMonthDay);
   // console.log(req.query.index?.toString());
   // console.log(indexRegions);
-
+  //aaaaaa
   let HouseS;
   let HouseD;
   let ApartS;
