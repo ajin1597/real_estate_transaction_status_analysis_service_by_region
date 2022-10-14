@@ -15,14 +15,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { indexRegions, indexMonthDay, indexLastMonthDay } = JSON.parse(
+  const { indexRegions, indexMonthDay } = JSON.parse(
     req.query.index?.toString() || ""
   );
   // console.log(indexRegions);
   // console.log(indexMonthDay);
   // console.log(indexLastMonthDay);
-  console.log(req.query.index?.toString());
-  console.log(indexRegions);
+  // console.log(req.query.index?.toString());
+  // console.log(indexRegions);
 
   let HouseS;
   let HouseD;
