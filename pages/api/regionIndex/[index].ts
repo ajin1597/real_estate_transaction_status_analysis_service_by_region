@@ -28,14 +28,6 @@ export default async function handler(
   // console.log(req.query.index?.toString());
   // console.log(indexRegions);
   //aaaaaa
-  let HouseST;
-  let HouseSL;
-  let HouseDT;
-  let HouseDL;
-  let ApartST;
-  let ApartSL;
-  let ApartDT;
-  let ApartDL;
 
   const yearNumber = (Number(indexMonthDay) / 100).toFixed(0);
 
@@ -43,7 +35,7 @@ export default async function handler(
 
   switch (yearNumber) {
     case "2022":
-      HouseST = await prisma.apartHouseIndex_2022.findMany({
+      const HouseST1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -52,7 +44,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseSL = await prisma.apartHouseIndex_2022.findMany({
+      const HouseSL1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -61,7 +53,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseDT = await prisma.apartHouseIndex_2022.findMany({
+      const HouseDT1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 주택 전세거래
         where: {
           REGION_CD: indexRegions,
@@ -70,7 +62,7 @@ export default async function handler(
           RESEARCH_DATE: indexMonthDay,
         },
       });
-      HouseDL = await prisma.apartHouseIndex_2022.findMany({
+      const HouseDL1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 주택 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -79,7 +71,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartST = await prisma.apartHouseIndex_2022.findMany({
+      const ApartST1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -88,7 +80,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartSL = await prisma.apartHouseIndex_2022.findMany({
+      const ApartSL1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -97,7 +89,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartDT = await prisma.apartHouseIndex_2022.findMany({
+      const ApartDT1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -106,7 +98,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartDL = await prisma.apartHouseIndex_2022.findMany({
+      const ApartDL1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -114,10 +106,20 @@ export default async function handler(
           APT_TYPE: "1",
           TR_GBN: "D",
         },
+      });
+      res.status(200).json({
+        HouseST: HouseST1,
+        HouseSL: HouseSL1,
+        HouseDT: HouseDT1,
+        HouseDL: HouseDL1,
+        ApartST: ApartST1,
+        ApartSL: ApartSL1,
+        ApartDT: ApartDT1,
+        ApartDL: ApartDL1,
       });
       break;
     case "2021":
-      HouseST = await prisma.apartHouseIndex_2021.findMany({
+      const HouseST2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -126,7 +128,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseSL = await prisma.apartHouseIndex_2021.findMany({
+      const HouseSL2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -135,7 +137,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseDT = await prisma.apartHouseIndex_2021.findMany({
+      const HouseDT2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 주택 전세거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -144,7 +146,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      HouseDL = await prisma.apartHouseIndex_2021.findMany({
+      const HouseDL2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 주택 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -153,7 +155,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartST = await prisma.apartHouseIndex_2021.findMany({
+      const ApartST2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -162,7 +164,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartSL = await prisma.apartHouseIndex_2021.findMany({
+      const ApartSL2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -171,7 +173,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartDT = await prisma.apartHouseIndex_2021.findMany({
+      const ApartDT2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -180,7 +182,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartDL = await prisma.apartHouseIndex_2021.findMany({
+      const ApartDL2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -188,10 +190,20 @@ export default async function handler(
           APT_TYPE: "1",
           TR_GBN: "D",
         },
+      });
+      res.status(200).json({
+        HouseST: HouseST2,
+        HouseSL: HouseSL2,
+        HouseDT: HouseDT2,
+        HouseDL: HouseDL2,
+        ApartST: ApartST2,
+        ApartSL: ApartSL2,
+        ApartDT: ApartDT2,
+        ApartDL: ApartDL2,
       });
       break;
     case "2020":
-      HouseST = await prisma.apartHouseIndex_2020.findMany({
+      const HouseST3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -200,7 +212,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseSL = await prisma.apartHouseIndex_2020.findMany({
+      const HouseSL3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -209,7 +221,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseDT = await prisma.apartHouseIndex_2020.findMany({
+      const HouseDT3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 주택 전세거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -218,7 +230,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      HouseDL = await prisma.apartHouseIndex_2020.findMany({
+      const HouseDL3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 주택 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -227,7 +239,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartST = await prisma.apartHouseIndex_2020.findMany({
+      const ApartST3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -236,7 +248,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartSL = await prisma.apartHouseIndex_2020.findMany({
+      const ApartSL3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -245,7 +257,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartDT = await prisma.apartHouseIndex_2020.findMany({
+      const ApartDT3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -254,7 +266,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartDL = await prisma.apartHouseIndex_2020.findMany({
+      const ApartDL3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -262,10 +274,20 @@ export default async function handler(
           APT_TYPE: "1",
           TR_GBN: "D",
         },
+      });
+      res.status(200).json({
+        HouseST: HouseST3,
+        HouseSL: HouseSL3,
+        HouseDT: HouseDT3,
+        HouseDL: HouseDL3,
+        ApartST: ApartST3,
+        ApartSL: ApartSL3,
+        ApartDT: ApartDT3,
+        ApartDL: ApartDL3,
       });
       break;
     case "2019":
-      HouseST = await prisma.apartHouseIndex_2019.findMany({
+      const HouseST4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -274,7 +296,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseSL = await prisma.apartHouseIndex_2019.findMany({
+      const HouseSL4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -283,7 +305,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      HouseDT = await prisma.apartHouseIndex_2019.findMany({
+      const HouseDT4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 주택 전세거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -292,7 +314,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      HouseDL = await prisma.apartHouseIndex_2019.findMany({
+      const HouseDL4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 주택 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -301,7 +323,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartST = await prisma.apartHouseIndex_2019.findMany({
+      const ApartST4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -310,7 +332,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartSL = await prisma.apartHouseIndex_2019.findMany({
+      const ApartSL4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -319,7 +341,7 @@ export default async function handler(
           TR_GBN: "S",
         },
       });
-      ApartDT = await prisma.apartHouseIndex_2019.findMany({
+      const ApartDT4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexMonthDay,
@@ -328,7 +350,7 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      ApartDL = await prisma.apartHouseIndex_2019.findMany({
+      const ApartDL4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 아파트 전세거래
         where: {
           RESEARCH_DATE: indexLastMonthDay,
@@ -336,18 +358,17 @@ export default async function handler(
           APT_TYPE: "1",
           TR_GBN: "D",
         },
+      });
+      res.status(200).json({
+        HouseST: HouseST4,
+        HouseSL: HouseSL4,
+        HouseDT: HouseDT4,
+        HouseDL: HouseDL4,
+        ApartST: ApartST4,
+        ApartSL: ApartSL4,
+        ApartDT: ApartDT4,
+        ApartDL: ApartDL4,
       });
       break;
   }
-
-  res.status(200).json({
-    HouseST,
-    HouseSL,
-    HouseDT,
-    HouseDL,
-    ApartST,
-    ApartSL,
-    ApartDT,
-    ApartDL,
-  });
 }
