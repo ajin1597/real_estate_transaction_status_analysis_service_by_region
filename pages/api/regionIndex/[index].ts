@@ -36,7 +36,6 @@ export default async function handler(
   switch (yearNumber) {
     case "2022":
       const HouseST1 = await prisma.apartHouseIndex_2022.findMany({
-        // 22년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
           REGION_CD: indexRegions,
