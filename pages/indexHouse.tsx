@@ -25,13 +25,7 @@ const Home: NextPage = () => {
 
   const [click, setClick] = useState(true);
   // 버튼을 클릭했을 시 보낼 데이터를 담아내는 변수
-  const [houseSdata, setHouseSTdata] = useState({});
-
-  const [houseDdata, setHouseDTdata] = useState({});
-
-  const [apartSdata, setApartSTdata] = useState({});
-
-  const [apartDdata, setApartDTdata] = useState({});
+  const [datas, setDatas] = useState({});
 
   const [firstRegion, setFirstRegion] = useState([
     { region: "서울", regionCD: "11000" },
@@ -367,7 +361,9 @@ const Home: NextPage = () => {
     setLastIndexMonthDay(lastDay);
   };
 
-  useEffect(() => {
+  const [flag, setFlag] = useState(false);
+
+  function addData() {
     const data = {
       indexRegions,
       indexMonthDay,
@@ -382,24 +378,22 @@ const Home: NextPage = () => {
       .then((json) => {
         // setIndexRegions(json);
         // console.log(json);
-        setHouseSTdata({
-          HouseST: json.HouseST,
-          HouseSL: json.HouseSL,
+
+        setDatas({
+          datas1: json.HouseST,
+          datas2: json.HouseSL,
+          datas3: json.HouseDT,
+          datas4: json.HouseDL,
+          datas5: json.ApartST,
+          datas6: json.ApartSL,
+          datas7: json.ApartDT,
+          datas8: json.ApartDL,
         });
-        setHouseDTdata({
-          HouseDT: json.HouseDT,
-          HouseDL: json.HouseDL,
-        });
-        setApartSTdata({
-          ApartST: json.ApartST,
-          ApartSL: json.ApartSL,
-        });
-        setApartDTdata({
-          ApartDT: json.ApartDT,
-          ApartDL: json.ApartDL,
-        });
+        return json;
       });
-  }, [click]); // 검색 버튼을 누르면 셀렉트박스에 지정된 지역 렌더링
+  }
+
+  // useEffect(() => {}, [click]); // 검색 버튼을 누르면 셀렉트박스에 지정된 지역 렌더링
 
   return (
     <Layout>
@@ -415,7 +409,9 @@ const Home: NextPage = () => {
             <div className="flex justify-between items-center text-xl">
               <div id="first_select_box_bar" className=" w-[250px]">
                 <select className="w-[200px]" onChange={allSecondRegion}>
-                  <option hidden>지역선택</option>
+                  <option hidden value={"0"}>
+                    지역선택
+                  </option>
                   {firstRegion.map((ele, idx) => (
                     <option key={idx} value={ele.regionCD}>
                       {ele.region}
@@ -426,7 +422,9 @@ const Home: NextPage = () => {
 
               <div id="second_select_box_bar" className=" w-[250px]">
                 <select className="w-[200px]" onChange={regions}>
-                  <option hidden>도시선택</option>
+                  <option hidden value={"0"}>
+                    도시선택
+                  </option>
                   {secondRegion.map((ele: any, idx) => (
                     <option key={idx} value={ele.regionCD}>
                       {ele.region}
@@ -437,7 +435,9 @@ const Home: NextPage = () => {
 
               <div id="third_select_box_bar" className=" w-[250px]">
                 <select className="w-[200px]" onChange={dayRegions}>
-                  <option hidden>날짜선택</option>
+                  <option hidden value={"0"}>
+                    날짜선택
+                  </option>
                   {ageValue.map((ele: any, idx) => (
                     <option key={idx} value={idx}>
                       {ele.RESEARCH_DATE}
@@ -451,6 +451,12 @@ const Home: NextPage = () => {
                   className="p-2 bg-blue-200 rounded-2xl "
                   onClick={() => {
                     setClick(!click);
+                    addData();
+                    setFlag(true);
+                    // setHouseSTdata(houseSdata);
+                    // setHouseDTdata(houseDdata);
+                    // setApartSTdata(apartSdata);
+                    // setApartDTdata(apartDdata);
                   }}
                 >
                   찾기
@@ -459,27 +465,75 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        {houseSdata ? (
-          <div className="h-[71vh] w-full bg-blue-200 flex justify-around items-center">
-            <div id="first_chart">
-              <div className="text-2xl p-2 flex justify-center">
-                주택 평균 거래 연령
+        {flag === true && (
+          <div>
+            {" "}
+            {datas ? (
+              <div className="h-[71vh] w-full bg-blue-200 ">
+                <div className="flex justify-around items-center">
+                  {datas ? (
+                    <div id="first_chart">
+                      <div className="text-2xl p-2 flex justify-center">
+                        전월 대비 주택 매매 지수 증감률
+                      </div>
+                      <div className="w-[450px] h-[450px]">
+                        <BarChart data={datas}></BarChart>
+                      </div>
+                    </div>
+                  ) : null}
+                  {/* {houseDdata ? (
+                    <div id="second_chart">
+                      <div className="text-2xl p-2 flex justify-center">
+                        전월 대비 주택 전세 지수 증감률
+                      </div>
+                      <div className="w-[450px] h-[450px]">
+                        <BarChart
+                          houseDdata={houseDdata ? houseDdata : ""}
+                        ></BarChart>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="flex justify-around items-center">
+                  {apartSdata ? (
+                    <div id="third_chart">
+                      <div className="text-2xl p-2 flex justify-center">
+                        전월 대비 아파트 매매 지수 증감률
+                      </div>
+                      <div className="w-[450px] h-[450px]">
+                        <BarChart
+                          apartSdata={apartSdata ? apartSdata : ""}
+                        ></BarChart>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {apartDdata ? (
+                    <div id="fourth_chart">
+                      <div className="text-2xl p-2 flex justify-center">
+                        전월 대비 아파트 매매 지수 증감률
+                      </div>
+                      <div className="w-[450px] h-[450px]">
+                        {apartDdata ? (
+                          <BarChart
+                            apartDdata={apartDdata ? apartDdata : ""}
+                          ></BarChart>
+                        ) : null}
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )} */}
+                </div>
               </div>
-              <div className="w-[450px] h-[450px]">
-                {/* <BarChart data={houseSdata}></BarChart> */}
-              </div>
-            </div>
-
-            <div id="second_chart">
-              <div className="text-2xl p-2 flex justify-center">
-                아파트 평균 거래 연령
-              </div>
-              <div className="w-[450px] h-[450px]">
-                {/* <BarChart data={apartSdata}></BarChart> */}
-              </div>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
-        ) : null}
+        )}
       </div>
     </Layout>
   );

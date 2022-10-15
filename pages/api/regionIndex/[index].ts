@@ -22,14 +22,8 @@ export default async function handler(
   const { indexRegions, indexMonthDay, indexLastMonthDay } = JSON.parse(
     req.query.index?.toString() || ""
   );
-  // console.log(indexRegions);
-  // console.log(indexMonthDay);
-  // console.log(indexLastMonthDay);
-  // console.log(req.query.index?.toString());
-  // console.log(indexRegions);
-  //aaaaaa
 
-  const yearNumber = (Number(indexMonthDay) / 100).toFixed(0);
+  const yearNumber = (Number(indexMonthDay) / 100).toFixed(0) || 0;
 
   // console.log(yearNumber);
 

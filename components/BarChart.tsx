@@ -2,61 +2,49 @@ import React from "react";
 import { useEffect, useState } from "react";
 import {
   ArcElement,
+  LinearScale,
+  BarController,
   BarElement,
   CategoryScale,
   Chart,
   ChartData,
-  LinearScale,
+  LineController,
   LineElement,
   PointElement,
   ChartOptions,
   Legend,
   Tooltip,
-  Title,
 } from "chart.js";
 import { useRouter } from "next/router";
-import { Doughnut } from "react-chartjs-2";
-import { type } from "os";
-import { userAgent } from "next/server";
-
-interface resultDataType {
-  AGE01_CNT: Number;
-  resultData: object;
-}
+import { Bar } from "react-chartjs-2";
 
 export default function DoughnutChart(props: any) {
   const router = useRouter();
 
-  let resultData: any = props.data[0];
-  useEffect(() => {}, []);
+  console.log(props.datas.datas1[0]);
+  // if (!props) console.log("23");
+
+  // console.log(props.apartDdata?.ApartDL[0].INDICES);
+  // console.log(props.apartDdata?.ApartDT[0].INDICES);
+  // console.log(props.apartDdata?.ApartDT[0].RESEARCH_DATE);
+  // console.log(props.apartDdata);
+  // console.log(props.houseSdata);
+  // console.log(props.houseSdata?.HouseSL[0].RESEARCH_DATE);
+  // let houseSale: any = props.houseDdata?.HouseST[0];
+  // let houseCharter: any = props.houseSdata?.HouseSL[0];
+
+  // console.log(houseSale);
+  // console.log(houseCharter);
 
   const [ChartData, setChartData] = useState<
-    ChartData<"doughnut", Number[], String>
+    ChartData<"bar", Number[], String>
   >({
-    labels: ["20대", "30대", "40대", "50대", "60대", "70대이상", "기타"],
+    labels: ["January", "February"],
     datasets: [
       {
-        label: "123",
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgba(153, 153, 153, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-          "rgba(153, 153, 153, 1)",
-        ],
-        borderWidth: 3,
+        label: "Dataset 1",
+        data: [1, 2],
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
   });
@@ -70,53 +58,40 @@ export default function DoughnutChart(props: any) {
     BarElement,
     Legend,
     Tooltip,
-    Title
+    LineController,
+    BarController
   );
 
   const configs: ChartOptions = {
     responsive: true,
     plugins: {
-      title: {
-        position: "top",
-      },
       legend: {
-        display: true,
-        align: "center",
-        position: "left",
-        // maxWidth: 0,
-        // maxHeight: 50,
+        position: "top" as const,
       },
-      tooltip: {
-        mode: "index",
-        intersect: true,
+      title: {
+        display: true,
+        text: "Chart.js Bar Chart",
       },
     },
   };
 
   function chartAttribute() {
     setChartData({
-      labels: ["20대", "30대", "40대", "50대", "60대", "70대이상", "기타"],
+      labels: ["", " "],
       datasets: [
         {
           label: "123",
-          data: [
-            resultData?.AGE01_CNT,
-            resultData?.AGE02_CNT,
-            resultData?.AGE03_CNT,
-            resultData?.AGE04_CNT,
-            resultData?.AGE05_CNT,
-            resultData?.AGE06_CNT,
-            resultData?.AGE07_CNT,
-          ],
+          data: [0, 0],
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
         },
       ],
     });
   }
 
-  useEffect(() => {
-    chartAttribute();
-    // router.reload();
-  }, [props]);
+  // useEffect(() => {
+  //   chartAttribute();
+  //   // router.reload();
+  // }, [props.apartDdata, props.apartSdata, props.houseDdata, props.houseSdata]);
 
-  return <Doughnut data={ChartData} options={configs}></Doughnut>;
+  return <Bar data={ChartData} options={configs} />;
 }

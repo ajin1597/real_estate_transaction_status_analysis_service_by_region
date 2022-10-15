@@ -19,16 +19,10 @@ import { Doughnut } from "react-chartjs-2";
 import { type } from "os";
 import { userAgent } from "next/server";
 
-interface resultDataType {
-  AGE01_CNT: Number;
-  resultData: object;
-}
-
 export default function DoughnutChart(props: any) {
   const router = useRouter();
 
   let resultData: any = props.data[0];
-  useEffect(() => {}, []);
 
   const [ChartData, setChartData] = useState<
     ChartData<"doughnut", Number[], String>
