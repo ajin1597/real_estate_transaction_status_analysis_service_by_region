@@ -1,18 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
-// const prisma = new PrismaClient();
 const prisma = new PrismaClient();
 
 type Data = {
-  HouseST?: any;
-  HouseSL?: any;
-  HouseDT?: any;
-  HouseDL?: any;
-  ApartST?: any;
-  ApartSL?: any;
-  ApartDT?: any;
-  ApartDL?: any;
+  arr?: any;
+  arr1?: any;
 };
 
 export default async function handler(
@@ -23,24 +16,17 @@ export default async function handler(
     req.query.index?.toString() || ""
   );
 
-  const yearNumber = (Number(indexMonthDay) / 100).toFixed(0) || 0;
+  let arr: any = [];
+  let arr1: any = [];
 
-  // console.log(yearNumber);
+  const yearNumber = (Number(indexMonthDay) / 100).toFixed(0) || 0;
+  const LyearNumber = (Number(indexLastMonthDay) / 100).toFixed(0) || 0;
 
   switch (yearNumber) {
     case "2022":
       const HouseST1 = await prisma.apartHouseIndex_2022.findMany({
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "S",
-        },
-      });
-      const HouseSL1 = await prisma.apartHouseIndex_2022.findMany({
-        // 22년도 주택 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
@@ -55,28 +41,10 @@ export default async function handler(
           RESEARCH_DATE: indexMonthDay,
         },
       });
-      const HouseDL1 = await prisma.apartHouseIndex_2022.findMany({
-        // 22년도 주택 전세거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "D",
-        },
-      });
       const ApartST1 = await prisma.apartHouseIndex_2022.findMany({
         // 22년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "1",
-          TR_GBN: "S",
-        },
-      });
-      const ApartSL1 = await prisma.apartHouseIndex_2022.findMany({
-        // 22년도 아파트 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
@@ -91,40 +59,13 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      const ApartDL1 = await prisma.apartHouseIndex_2022.findMany({
-        // 22년도 아파트 전세거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "1",
-          TR_GBN: "D",
-        },
-      });
-      res.status(200).json({
-        HouseST: HouseST1,
-        HouseSL: HouseSL1,
-        HouseDT: HouseDT1,
-        HouseDL: HouseDL1,
-        ApartST: ApartST1,
-        ApartSL: ApartSL1,
-        ApartDT: ApartDT1,
-        ApartDL: ApartDL1,
-      });
+      arr = [...HouseST1, ...HouseDT1, ...ApartST1, ...ApartDT1];
       break;
     case "2021":
       const HouseST2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "S",
-        },
-      });
-      const HouseSL2 = await prisma.apartHouseIndex_2021.findMany({
-        // 21년도 주택 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
@@ -139,28 +80,10 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      const HouseDL2 = await prisma.apartHouseIndex_2021.findMany({
-        // 21년도 주택 전세거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "D",
-        },
-      });
       const ApartST2 = await prisma.apartHouseIndex_2021.findMany({
         // 21년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "1",
-          TR_GBN: "S",
-        },
-      });
-      const ApartSL2 = await prisma.apartHouseIndex_2021.findMany({
-        // 21년도 아파트 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
@@ -175,40 +98,13 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      const ApartDL2 = await prisma.apartHouseIndex_2021.findMany({
-        // 21년도 아파트 전세거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "1",
-          TR_GBN: "D",
-        },
-      });
-      res.status(200).json({
-        HouseST: HouseST2,
-        HouseSL: HouseSL2,
-        HouseDT: HouseDT2,
-        HouseDL: HouseDL2,
-        ApartST: ApartST2,
-        ApartSL: ApartSL2,
-        ApartDT: ApartDT2,
-        ApartDL: ApartDL2,
-      });
+      arr = [...HouseST2, ...HouseDT2, ...ApartST2, ...ApartDT2];
       break;
     case "2020":
       const HouseST3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "S",
-        },
-      });
-      const HouseSL3 = await prisma.apartHouseIndex_2020.findMany({
-        // 20년도 주택 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
@@ -223,28 +119,10 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      const HouseDL3 = await prisma.apartHouseIndex_2020.findMany({
-        // 20년도 주택 전세거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "D",
-        },
-      });
       const ApartST3 = await prisma.apartHouseIndex_2020.findMany({
         // 20년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "1",
-          TR_GBN: "S",
-        },
-      });
-      const ApartSL3 = await prisma.apartHouseIndex_2020.findMany({
-        // 20년도 아파트 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
@@ -259,40 +137,13 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      const ApartDL3 = await prisma.apartHouseIndex_2020.findMany({
-        // 20년도 아파트 전세거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "1",
-          TR_GBN: "D",
-        },
-      });
-      res.status(200).json({
-        HouseST: HouseST3,
-        HouseSL: HouseSL3,
-        HouseDT: HouseDT3,
-        HouseDL: HouseDL3,
-        ApartST: ApartST3,
-        ApartSL: ApartSL3,
-        ApartDT: ApartDT3,
-        ApartDL: ApartDL3,
-      });
+      arr = [...HouseST3, ...HouseDT3, ...ApartST3, ...ApartDT3];
       break;
     case "2019":
       const HouseST4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 주택 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "S",
-        },
-      });
-      const HouseSL4 = await prisma.apartHouseIndex_2019.findMany({
-        // 19년도 주택 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "0",
           TR_GBN: "S",
@@ -307,28 +158,10 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      const HouseDL4 = await prisma.apartHouseIndex_2019.findMany({
-        // 19년도 주택 전세거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "0",
-          TR_GBN: "D",
-        },
-      });
       const ApartST4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 아파트 매매거래
         where: {
           RESEARCH_DATE: indexMonthDay,
-          REGION_CD: indexRegions,
-          APT_TYPE: "1",
-          TR_GBN: "S",
-        },
-      });
-      const ApartSL4 = await prisma.apartHouseIndex_2019.findMany({
-        // 19년도 아파트 매매거래
-        where: {
-          RESEARCH_DATE: indexLastMonthDay,
           REGION_CD: indexRegions,
           APT_TYPE: "1",
           TR_GBN: "S",
@@ -343,6 +176,156 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
+      arr = [...HouseST4, ...HouseDT4, ...ApartST4, ...ApartDT4];
+      break;
+  }
+
+  switch (LyearNumber) {
+    case "2022":
+      const HouseSL1 = await prisma.apartHouseIndex_2022.findMany({
+        // 22년도 주택 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "S",
+        },
+      });
+      const HouseDL1 = await prisma.apartHouseIndex_2022.findMany({
+        // 22년도 주택 전세거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "D",
+        },
+      });
+      const ApartSL1 = await prisma.apartHouseIndex_2022.findMany({
+        // 22년도 아파트 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "1",
+          TR_GBN: "S",
+        },
+      });
+      const ApartDL1 = await prisma.apartHouseIndex_2022.findMany({
+        // 22년도 아파트 전세거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "1",
+          TR_GBN: "D",
+        },
+      });
+      arr1 = [...HouseSL1, ...HouseDL1, ...ApartSL1, ...ApartDL1];
+      break;
+    case "2021":
+      const HouseSL2 = await prisma.apartHouseIndex_2021.findMany({
+        // 21년도 주택 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "S",
+        },
+      });
+      const HouseDL2 = await prisma.apartHouseIndex_2021.findMany({
+        // 21년도 주택 전세거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "D",
+        },
+      });
+      const ApartSL2 = await prisma.apartHouseIndex_2021.findMany({
+        // 21년도 아파트 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "1",
+          TR_GBN: "S",
+        },
+      });
+      const ApartDL2 = await prisma.apartHouseIndex_2021.findMany({
+        // 21년도 아파트 전세거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "1",
+          TR_GBN: "D",
+        },
+      });
+      arr1 = [...HouseSL2, ...HouseDL2, ...ApartSL2, ...ApartDL2];
+      break;
+    case "2020":
+      const HouseSL3 = await prisma.apartHouseIndex_2020.findMany({
+        // 20년도 주택 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "S",
+        },
+      });
+      const HouseDL3 = await prisma.apartHouseIndex_2020.findMany({
+        // 20년도 주택 전세거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "D",
+        },
+      });
+      const ApartSL3 = await prisma.apartHouseIndex_2020.findMany({
+        // 20년도 아파트 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "1",
+          TR_GBN: "S",
+        },
+      });
+      const ApartDL3 = await prisma.apartHouseIndex_2020.findMany({
+        // 20년도 아파트 전세거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "1",
+          TR_GBN: "D",
+        },
+      });
+      arr1 = [...HouseSL3, ...HouseDL3, ...ApartSL3, ...ApartDL3];
+      break;
+    case "2019":
+      const HouseSL4 = await prisma.apartHouseIndex_2019.findMany({
+        // 19년도 주택 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "S",
+        },
+      });
+      const HouseDL4 = await prisma.apartHouseIndex_2019.findMany({
+        // 19년도 주택 전세거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "0",
+          TR_GBN: "D",
+        },
+      });
+      const ApartSL4 = await prisma.apartHouseIndex_2019.findMany({
+        // 19년도 아파트 매매거래
+        where: {
+          RESEARCH_DATE: indexLastMonthDay,
+          REGION_CD: indexRegions,
+          APT_TYPE: "1",
+          TR_GBN: "S",
+        },
+      });
       const ApartDL4 = await prisma.apartHouseIndex_2019.findMany({
         // 19년도 아파트 전세거래
         where: {
@@ -352,16 +335,12 @@ export default async function handler(
           TR_GBN: "D",
         },
       });
-      res.status(200).json({
-        HouseST: HouseST4,
-        HouseSL: HouseSL4,
-        HouseDT: HouseDT4,
-        HouseDL: HouseDL4,
-        ApartST: ApartST4,
-        ApartSL: ApartSL4,
-        ApartDT: ApartDT4,
-        ApartDL: ApartDL4,
-      });
+      arr1 = [...HouseSL4, ...HouseDL4, ...ApartSL4, ...ApartDL4];
       break;
   }
+
+  res.status(200).json({
+    arr,
+    arr1,
+  });
 }

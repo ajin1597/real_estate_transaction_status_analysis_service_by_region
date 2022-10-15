@@ -21,20 +21,9 @@ import { Bar } from "react-chartjs-2";
 export default function DoughnutChart(props: any) {
   const router = useRouter();
 
-  console.log(props.datas.datas1[0]);
-  // if (!props) console.log("23");
-
-  // console.log(props.apartDdata?.ApartDL[0].INDICES);
-  // console.log(props.apartDdata?.ApartDT[0].INDICES);
-  // console.log(props.apartDdata?.ApartDT[0].RESEARCH_DATE);
-  // console.log(props.apartDdata);
-  // console.log(props.houseSdata);
-  // console.log(props.houseSdata?.HouseSL[0].RESEARCH_DATE);
-  // let houseSale: any = props.houseDdata?.HouseST[0];
-  // let houseCharter: any = props.houseSdata?.HouseSL[0];
-
-  // console.log(houseSale);
-  // console.log(houseCharter);
+  console.log(props.data);
+  // ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+  //병신아 데이터 넘어온다 병신아 차트 만들어라 븅신아
 
   const [ChartData, setChartData] = useState<
     ChartData<"bar", Number[], String>

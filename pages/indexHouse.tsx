@@ -25,7 +25,10 @@ const Home: NextPage = () => {
 
   const [click, setClick] = useState(true);
   // 버튼을 클릭했을 시 보낼 데이터를 담아내는 변수
-  const [datas, setDatas] = useState({});
+  const [datas1, setDatas1] = useState<any>([]);
+  const [datas2, setDatas2] = useState<any>([]);
+  const [datas3, setDatas3] = useState<any>([]);
+  const [datas4, setDatas4] = useState<any>([]);
 
   const [firstRegion, setFirstRegion] = useState([
     { region: "서울", regionCD: "11000" },
@@ -353,10 +356,6 @@ const Home: NextPage = () => {
     // console.log(idx + 1);
     const day = ageValue[idx].RESEARCH_DATE;
     const lastDay = ageValue[idx + 1].RESEARCH_DATE;
-
-    // console.log(day);
-    // console.log(lastDay);
-
     setIndexMonthDay(day);
     setLastIndexMonthDay(lastDay);
   };
@@ -369,31 +368,16 @@ const Home: NextPage = () => {
       indexMonthDay,
       indexLastMonthDay,
     };
-    // console.log(data.indexMonthDay);
-    // console.log(data.indexLastMonthDay);
 
-    // console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     fetch(`api/regionIndex/${JSON.stringify(data)}`)
       .then((res) => res.json())
       .then((json) => {
-        // setIndexRegions(json);
-        // console.log(json);
-
-        setDatas({
-          datas1: json.HouseST,
-          datas2: json.HouseSL,
-          datas3: json.HouseDT,
-          datas4: json.HouseDL,
-          datas5: json.ApartST,
-          datas6: json.ApartSL,
-          datas7: json.ApartDT,
-          datas8: json.ApartDL,
-        });
-        return json;
+        setDatas1([json.arr[0], json.arr1[0]]);
+        setDatas2([json.arr[1], json.arr1[1]]);
+        setDatas3([json.arr[2], json.arr1[2]]);
+        setDatas4([json.arr[3], json.arr1[3]]);
       });
   }
-
-  // useEffect(() => {}, [click]); // 검색 버튼을 누르면 셀렉트박스에 지정된 지역 렌더링
 
   return (
     <Layout>
@@ -453,10 +437,6 @@ const Home: NextPage = () => {
                     setClick(!click);
                     addData();
                     setFlag(true);
-                    // setHouseSTdata(houseSdata);
-                    // setHouseDTdata(houseDdata);
-                    // setApartSTdata(apartSdata);
-                    // setApartDTdata(apartDdata);
                   }}
                 >
                   찾기
@@ -465,75 +445,53 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        {flag === true && (
-          <div>
-            {" "}
-            {datas ? (
-              <div className="h-[71vh] w-full bg-blue-200 ">
-                <div className="flex justify-around items-center">
-                  {datas ? (
-                    <div id="first_chart">
-                      <div className="text-2xl p-2 flex justify-center">
-                        전월 대비 주택 매매 지수 증감률
-                      </div>
-                      <div className="w-[450px] h-[450px]">
-                        <BarChart data={datas}></BarChart>
-                      </div>
-                    </div>
-                  ) : null}
-                  {/* {houseDdata ? (
-                    <div id="second_chart">
-                      <div className="text-2xl p-2 flex justify-center">
-                        전월 대비 주택 전세 지수 증감률
-                      </div>
-                      <div className="w-[450px] h-[450px]">
-                        <BarChart
-                          houseDdata={houseDdata ? houseDdata : ""}
-                        ></BarChart>
-                      </div>
-                    </div>
-                  ) : (
-                    ""
-                  )}
+
+        <div>
+          {datas1.length !== 0 ? (
+            <div className="h-[71vh] w-full bg-blue-200 ">
+              <div className="flex justify-around items-center">
+                <div id="first_chart">
+                  <div className="text-2xl p-2 flex justify-center">
+                    전월 대비 주택 매매 지수 증감률
+                  </div>
+                  <div className="w-[450px] h-[450px]">
+                    <BarChart data={datas1}></BarChart>
+                  </div>
                 </div>
-                <div className="flex justify-around items-center">
-                  {apartSdata ? (
-                    <div id="third_chart">
-                      <div className="text-2xl p-2 flex justify-center">
-                        전월 대비 아파트 매매 지수 증감률
-                      </div>
-                      <div className="w-[450px] h-[450px]">
-                        <BarChart
-                          apartSdata={apartSdata ? apartSdata : ""}
-                        ></BarChart>
-                      </div>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  {apartDdata ? (
-                    <div id="fourth_chart">
-                      <div className="text-2xl p-2 flex justify-center">
-                        전월 대비 아파트 매매 지수 증감률
-                      </div>
-                      <div className="w-[450px] h-[450px]">
-                        {apartDdata ? (
-                          <BarChart
-                            apartDdata={apartDdata ? apartDdata : ""}
-                          ></BarChart>
-                        ) : null}
-                      </div>
-                    </div>
-                  ) : (
-                    ""
-                  )} */}
+
+                <div id="second_chart">
+                  <div className="text-2xl p-2 flex justify-center">
+                    전월 대비 주택 전세 지수 증감률
+                  </div>
+                  <div className="w-[450px] h-[450px]">
+                    <BarChart data={datas2}></BarChart>
+                  </div>
                 </div>
               </div>
-            ) : (
-              ""
-            )}
-          </div>
-        )}
+              <div className="flex justify-around items-center">
+                <div id="third_chart">
+                  <div className="text-2xl p-2 flex justify-center">
+                    전월 대비 아파트 매매 지수 증감률
+                  </div>
+                  <div className="w-[450px] h-[450px]">
+                    <BarChart data={datas3}></BarChart>
+                  </div>
+                </div>
+
+                <div id="fourth_chart">
+                  <div className="text-2xl p-2 flex justify-center">
+                    전월 대비 아파트 매매 지수 증감률
+                  </div>
+                  <div className="w-[450px] h-[450px]">
+                    <BarChart data={datas4}></BarChart>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div>456</div>
+          )}
+        </div>
       </div>
     </Layout>
   );
