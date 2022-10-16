@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import DoughnutChart from "../components/DoughnutChart";
+import AgeLineChart from "../components/AgeLineChart";
+import AgeLineChart2 from "../components/AgeLineChart2";
 import React from "react";
 import { useRouter } from "next/router";
 
@@ -425,7 +427,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        {houseData06 ? (
+        {houseData06 !== undefined ? (
           <div className="h-[71vh] w-full bg-blue-200 flex justify-around items-center">
             <div id="first_chart">
               <div className="text-2xl p-2 flex justify-center">
@@ -445,7 +447,26 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
-        ) : null}
+        ) : (
+          <div className="w-full flex flex-col items-center">
+            <div className="w-[80%] pt-[50px]">
+              <div className=" text-2xl p-2 flex justify-center">
+                주택 평균 거래 연령
+              </div>
+              <div className="w-full">
+                <AgeLineChart />
+              </div>
+            </div>
+            <div className="w-[80%] pt-[50px]">
+              <div className="text-2xl p-2 flex justify-center">
+                아파트 평균 거래 연령
+              </div>
+              <div className="w-full">
+                <AgeLineChart2 />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Layout>
   );

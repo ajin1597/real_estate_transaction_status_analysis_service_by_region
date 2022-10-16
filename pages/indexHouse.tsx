@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import BarChart from "../components/BarChart";
+import LineChart from "../components/LineChart";
 import React from "react";
 import { useRouter } from "next/router";
 import { copyFileSync } from "fs";
@@ -489,7 +490,9 @@ const Home: NextPage = () => {
               </div>
             </div>
           ) : (
-            <div>456</div>
+            <div>
+              <LineChart />
+            </div>
           )}
         </div>
       </div>

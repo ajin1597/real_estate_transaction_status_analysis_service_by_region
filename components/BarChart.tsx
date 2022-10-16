@@ -29,15 +29,7 @@ export default function DoughnutChart(props: any) {
   let dayData: any = props.data[0];
   let lastDayData: any = props.data[1];
 
-  console.log(typeof dayData.INDICES);
-  console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  console.log(lastDayData.INDICES);
-  const a = dayData.INDICES - lastDayData.INDICES;
-
-  console.log(a);
-
   const [inDicesData, setInDicesData] = useState("");
-
   const [ChartData, setChartData] = useState<
     ChartData<"bar", Number[], String>
   >({
