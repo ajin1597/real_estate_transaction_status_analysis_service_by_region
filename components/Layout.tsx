@@ -7,12 +7,11 @@ export default function Layout(props: any) {
 
   return (
     <div className="flex justify-center">
-      <div className="w-[80%] p-6 bg-gray-300">
+      <div className="w-[80%] p-3 bg-indigo-50">
         <div id="title_Layout" className="  flex justify-between text-2xl ">
-          <div id="title_left_bar">a</div>
           <nav
             id="title_right_bar"
-            className="flex justify-between w-[450px] border-l-4 pl-5 "
+            className="flex justify-around items-center w-full bg-emerald-900 text-white h-[100px]"
           >
             <Link href={"/"} id="first_page">
               <div className="hover:bg-blue-300">
@@ -32,7 +31,7 @@ export default function Layout(props: any) {
                     />
                   </svg>
                 </div>
-                <span>Home</span>
+                <span>지역별 평균 거래 연령</span>
               </div>
             </Link>
             <Link href={"/indexHouse"} id="second_page">
@@ -53,54 +52,12 @@ export default function Layout(props: any) {
                     />
                   </svg>
                 </div>
-                <span>HouseIndex</span>
-              </div>
-            </Link>
-            <Link href={"/mypage"} id="third_page">
-              <div className="hover:bg-blue-300">
-                <div id="third_page_icon" className="flex justify-center ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-10 h-10"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <span>MY Page</span>
-              </div>
-            </Link>
-            <Link href={"/logIn"} id="fourth_page">
-              <div className="hover:bg-blue-300">
-                <div id="fourth_page_icon" className="flex justify-center ">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-10 h-10"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                    />
-                  </svg>
-                </div>
-                <span>LOG IN</span>
+                <span>지역별 매매,전세 지수</span>
               </div>
             </Link>
           </nav>
         </div>
-        <div className=" p-6">{props.children}</div>
+        <div>{props.children}</div>
       </div>
     </div>
   );

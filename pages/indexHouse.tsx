@@ -386,13 +386,10 @@ const Home: NextPage = () => {
         <div id="left_box">
           <div
             id="first_choose_bar"
-            className="flex justify-between border-2 h-[12.6vh] w-[135.4vh] font-bold bg-red-200"
+            className="flex justify-center border-[1px] h-[100px] w-full font-bold bg-emerald-900"
           >
-            <div className="flex justify-center items-center bg-red-200 w-[300px]  text-3xl hover:bg-blue-200  h-full border-r-2">
-              지수
-            </div>
-            <div className="flex justify-between items-center text-xl">
-              <div id="first_select_box_bar" className=" w-[250px]">
+            <div className="flex items-center text-xl">
+              <div id="first_select_box_bar" className="w-full">
                 <select className="w-[200px]" onChange={allSecondRegion}>
                   <option hidden value={"0"}>
                     지역선택
@@ -405,7 +402,7 @@ const Home: NextPage = () => {
                 </select>
               </div>
 
-              <div id="second_select_box_bar" className=" w-[250px]">
+              <div id="second_select_box_bar" className="p-2 w-full">
                 <select className="w-[200px]" onChange={regions}>
                   <option hidden value={"0"}>
                     도시선택
@@ -418,7 +415,7 @@ const Home: NextPage = () => {
                 </select>
               </div>
 
-              <div id="third_select_box_bar" className=" w-[250px]">
+              <div id="third_select_box_bar" className="w-full">
                 <select className="w-[200px]" onChange={dayRegions}>
                   <option hidden value={"0"}>
                     날짜선택
@@ -431,7 +428,7 @@ const Home: NextPage = () => {
                 </select>
               </div>
 
-              <div className="w-[100px]">
+              <div className="p-2 w-full">
                 <button
                   className="p-2 bg-blue-200 rounded-2xl "
                   onClick={() => {
@@ -455,7 +452,7 @@ const Home: NextPage = () => {
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 주택 매매 지수 증감률
                   </div>
-                  <div className="pt-[50px] w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[400px] h-[400px]">
                     <BarChart data={datas1}></BarChart>
                   </div>
                 </div>
@@ -464,7 +461,7 @@ const Home: NextPage = () => {
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 주택 전세 지수 증감률
                   </div>
-                  <div className="pt-[50px] w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[400px] h-[400px]">
                     <BarChart data={datas2}></BarChart>
                   </div>
                 </div>
@@ -474,7 +471,7 @@ const Home: NextPage = () => {
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 아파트 매매 지수 증감률
                   </div>
-                  <div className="pt-[50px] w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[400px] h-[400px]">
                     <BarChart data={datas3}></BarChart>
                   </div>
                 </div>
@@ -483,7 +480,7 @@ const Home: NextPage = () => {
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 아파트 매매 지수 증감률
                   </div>
-                  <div className="pt-[50px] w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[400px] h-[400px]">
                     <BarChart data={datas4}></BarChart>
                   </div>
                 </div>

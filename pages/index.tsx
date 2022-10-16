@@ -371,17 +371,14 @@ const Home: NextPage = () => {
 
   return (
     <Layout>
-      <div id="mainPage" className=" ">
+      <div id="mainPage">
         <div id="left_box">
           <div
             id="first_choose_bar"
-            className="flex justify-between border-2 h-[12.6vh] w-[135.4vh] font-bold bg-red-200"
+            className="flex justify-center border-[1px] h-[100px] w-full font-bold bg-emerald-900"
           >
-            <div className="flex justify-center items-center bg-red-200 w-[300px]  text-3xl hover:bg-blue-200  h-full border-r-2">
-              연령대
-            </div>
-            <div className="flex justify-between items-center text-xl">
-              <div id="first_select_box_bar" className=" w-[250px]">
+            <div className="flex items-center text-xl">
+              <div id="first_select_box_bar" className=" w-full">
                 <select className="w-[200px]" onChange={allSecondRegion}>
                   <option hidden>지역선택</option>
                   {firstRegion.map((ele, idx) => (
@@ -392,7 +389,7 @@ const Home: NextPage = () => {
                 </select>
               </div>
 
-              <div id="second_select_box_bar" className=" w-[250px]">
+              <div id="second_select_box_bar" className="p-2 w-full">
                 <select className="w-[200px]" onChange={regions}>
                   <option hidden>도시선택</option>
                   {secondRegion.map((ele: any, idx) => (
@@ -403,7 +400,7 @@ const Home: NextPage = () => {
                 </select>
               </div>
 
-              <div id="third_select_box_bar" className=" w-[250px]">
+              <div id="third_select_box_bar" className=" w-full">
                 <select className="w-[200px]" onChange={dayRegions}>
                   <option hidden>날짜선택</option>
                   {ageValue.map((ele: any, idx) => (
@@ -414,7 +411,7 @@ const Home: NextPage = () => {
                 </select>
               </div>
 
-              <div className="w-[100px]">
+              <div className="p-2 w-full">
                 <button
                   className="p-2 bg-blue-200 rounded-2xl "
                   onClick={() => {
