@@ -16,8 +16,6 @@ import {
 } from "chart.js";
 import { useRouter } from "next/router";
 import { Doughnut } from "react-chartjs-2";
-import { type } from "os";
-import { userAgent } from "next/server";
 
 export default function DoughnutChart(props: any) {
   const router = useRouter();

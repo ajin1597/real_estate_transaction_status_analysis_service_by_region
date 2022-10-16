@@ -448,13 +448,13 @@ const Home: NextPage = () => {
 
         <div>
           {datas1.length !== 0 ? (
-            <div className="h-[71vh] w-full bg-blue-200 ">
+            <div className="pt-[100px] h-full w-full bg-blue-200 ">
               <div className="flex justify-around items-center">
                 <div id="first_chart">
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 주택 매매 지수 증감률
                   </div>
-                  <div className="w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[450px] h-[450px]">
                     <BarChart data={datas1}></BarChart>
                   </div>
                 </div>
@@ -463,7 +463,7 @@ const Home: NextPage = () => {
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 주택 전세 지수 증감률
                   </div>
-                  <div className="w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[450px] h-[450px]">
                     <BarChart data={datas2}></BarChart>
                   </div>
                 </div>
@@ -473,7 +473,7 @@ const Home: NextPage = () => {
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 아파트 매매 지수 증감률
                   </div>
-                  <div className="w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[450px] h-[450px]">
                     <BarChart data={datas3}></BarChart>
                   </div>
                 </div>
@@ -482,7 +482,7 @@ const Home: NextPage = () => {
                   <div className="text-2xl p-2 flex justify-center">
                     전월 대비 아파트 매매 지수 증감률
                   </div>
-                  <div className="w-[450px] h-[450px]">
+                  <div className="pt-[50px] w-[450px] h-[450px]">
                     <BarChart data={datas4}></BarChart>
                   </div>
                 </div>
